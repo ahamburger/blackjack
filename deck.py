@@ -10,7 +10,7 @@ class Deck:
 
 	def pickCard(self):
 		if len(self._cards_left)==0:
-			print "out of cards"	#reshuffle? will this happen?
+			print "out of cards"	#TODO reshuffle? will this happen?
 			return -1
 
 		randomCard = random.randint(0,len(self._cards_left)-1) # random number between 0 and len(cards_left)
@@ -33,3 +33,6 @@ class Deck:
 			return "Queen"
 		if number == 13:
 			return "King"
+
+	def tooFewCards(self):
+		return len(self._cards_left) < 10 #TODO this is arbitrary now

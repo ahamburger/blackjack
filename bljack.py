@@ -1,22 +1,16 @@
 #! /usr/bin/python
-from deck import Deck
 from game import Game
 
 
 if __name__ == "__main__":
 	ready = raw_input("Welcome to Blackjack! Ready to play (y or n)? \n")
 	if ready == 'y':
-		curr_deck = Deck()
-		game = Game(curr_deck)
+		game = Game()
 		game.play()
 
 
 
 #Notes:
-# TODO
-	# -- keep track of round number (new deck after 6)
-	# -- keep track of win percentage
-
 # list of size 52, containing all 1s to start
 # As card is used, set index to 0
 
