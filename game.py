@@ -12,7 +12,7 @@ class Game:
 	def deal(self):
 		#dealer gets 2 cards (both face up?)
 		self._dCards = [self._deck.pickCard(), self._deck.pickCard()]
-		
+
 		#player gets 2 cards (one face up, one face down)
 		self._pCards = [self._deck.pickCard(), self._deck.pickCard()]
 
@@ -32,8 +32,17 @@ class Game:
 		return
 
 	def pickWinner(self):
-		return
+		d_sum = self._deck.addCards(self._dCards)
+		p_sum = self._deck.addCards(self._pCards)
+		
+		if (21-p_sum < 21-d_sum):	#player is closer to 21 than dealer
+			return True
+		elif (21-p_sum == 21-d_sum): #tie--- TODO find out what todo
+			return False
+		else:
+			return False
 
+	
 	# deal cards, then play turns
 	def play(self):
 		deal()
@@ -71,5 +80,5 @@ class Game:
 			msg = "You won! \n"
 
 		msg += "That makes your total win percentage: " + str(self._wins/self._total_rounds) + "%. \n"
-		again = raw_input(msg + "Would you like to play again (y or n)? \n")
+		again = raw_input(msg + "Would you like to play again? (y or n) \n")
 		return again == 'y'

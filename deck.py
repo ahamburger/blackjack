@@ -36,3 +36,24 @@ class Deck:
 
 	def tooFewCards(self):
 		return len(self._cards_left) < 10 #TODO this is arbitrary now
+
+
+	#TODO explain ace logic
+	def addCards(cardList):
+		sum = 0
+		haveAce = False
+		
+		for c in cardList:
+			number = (c % 4) + 1
+			if number > 10:		# treat jack, queen, king as 10
+				number = 10	
+			
+			if number == 1:
+				haveAce = True
+
+			sum += number
+				
+		if haveAce and (sum + 10 <=21):
+			sum += 10		
+
+		return sum

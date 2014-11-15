@@ -3,7 +3,7 @@ from game import Game
 
 
 if __name__ == "__main__":
-	ready = raw_input("Welcome to Blackjack! Ready to play (y or n)? \n")
+	ready = raw_input("Welcome to Blackjack! Ready to play? (y or n) \n")
 	if ready == 'y':
 		game = Game()
 		game.play()
