@@ -15,14 +15,25 @@ class Game:
 
 		#player gets 2 cards (one face up, one face down)
 		self._pCards = [self._deck.pickCard(), self._deck.pickCard()]
-
+		# print("The dealer has been dealt " + _self._deck.stringify(self._dCards))
+		# print("You've been dealt" +  _self._deck.stringify(self._pCards))
 
 	#return cards that player has 
 	#if busted, removes those cards from deck, start new game
 	def playerTurn(self):
 		#hit or stay or bust
-		#raw_input("You've been dealt \n")
-		return
+		move = raw_input("Would you like to hit (h) or stay (s)? \n")
+		if move == 'h':
+			dealOne()
+			if p_sum > 21:
+				print ("Oops, you busted!")	  #TODO: bust? busted?
+				playAgain(False)
+				return	
+			print("Okay, now you have ...")	#TODO add acutal cards string			
+			playerTurn()
+		elif move != 's':
+			print("Invalid selection. Try again. \n")
+			playerTurn()
 
 
 	#return cards that dealer has
