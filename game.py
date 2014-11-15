@@ -12,23 +12,9 @@ class Game:
 	def deal(self):
 		#dealer gets 2 cards (both face up?)
 		self._dCards = [self._deck.pickCard(), self._deck.pickCard()]
-
+		
 		#player gets 2 cards (one face up, one face down)
 		self._pCards = [self._deck.pickCard(), self._deck.pickCard()]
-
-		printDCards()
-		printPCards()
-
-		move = raw_input("Would you like to hit (h) or stay (s)?")
-		if (move == 'h'):
-
-
-	# player and dealer get cards, pick winner
-	def playTurns(self):
-		player_cards = playerTurn()	
-		dealer_cards = dealerTurn()
-		
-		return pickWinner()	#True if player won, false if lost
 
 
 	#return cards that player has 
@@ -51,7 +37,10 @@ class Game:
 	# deal cards, then play turns
 	def play(self):
 		deal()
-		win = playTurns()
+		playerTurn()
+		dealerTurn()
+
+		win = pickWinner() #True if player won, false if lost
 
 		#ask to play again
 		if (playAgain(win)):
