@@ -6,9 +6,9 @@ class Deck:
 		self._card_usage = [1]*52
 		self._cards_left = range(0,52)
 
-	def pick_card(self):
+	def pickCard(self):
 		if len(self._cards_left)==0:
-			print "out of cards"	#reshuffle? end game?
+			print "out of cards"	#reshuffle? will this happen?
 			return -1
 
 		randomCard = random.randint(0,len(self._cards_left)-1) # random number between 0 and len(cards_left)
@@ -18,3 +18,16 @@ class Deck:
 		
 		_card_usage[cardIndex] = 0
 		return cardIndex
+
+	def cardify(self, indexNum):
+		number = (indexNum % 4) + 1
+		if number == 1:
+			return "Ace"
+		if number <= 10:
+			return str(number)
+		if number == 11:
+			return "Jack"
+		if number == 12:
+			return "Queen"
+		if number == 13:
+			return "King"
