@@ -1,3 +1,5 @@
+import random
+
 class Deck:
 	def __init__(self, card_usage=[], cards_left=[]):
 		self.reset()

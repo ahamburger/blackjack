@@ -1,98 +1,14 @@
 #! /usr/bin/python
-import random
 from deck import Deck
+from game import Game
 
-
-total_rounds = 0 
-wins = 0
-#reset deck and remaining cards when starting a new game
-def reset():
-	return Deck()
-
-def dealOne():
-	
-	return
-
-def deal(curr_deck):
-	#dealer gets 2 cards (both face up?)
-	dealer_cards = [curr_deck.pickCard(), curr_deck.pickCard()]
-
-	#player gets 2 cards (one face up, one face down)
-	player_cards = [curr_deck.pickCard(), curr_deck.pickCard()]
-
-	print ("The dealer has: " + stringify(dealer_cards))
-	print ("You have: " + stringify(player_cards));
-
-	move = raw_input("Would you like to hit (h) or stay (s)?")
-	if (move == 'h'):
-
-
-	return curr_deck
-
-# player and dealer get cards, pick winner
-def playTurns(curr_deck, round):
-	player_cards = playerTurn(curr_deck)
-	curr_deck = updateDeck(curr_deck, player_cards)  #remove cards from deck
-
-	dealer_cards = dealerTurn(curr_deck)
-	curr_deck = updateDeck(curr_deck, player_cards)  #remove cards from deck
-
-	return pickWinner(player_cards, dealer_cards)	#True if player won, false if lost
-
-
-#return cards that player has 
-#if busted, removes those cards from deck, start new game
-def playerTurn(curr_deck):
-	#hit or stay or bust
-	#raw_input("You've been dealt \n")
-	return
-
-
-#return cards that dealer has
-#if busted, removes those cards from deck, start new game
-def dealerTurn(curr_deck):
-	#hit or stay or bust
-	return
-
-def pickWinner(player, dealer):
-	return
-
-# round management, deal cards, then play turns
-def play(curr_deck, round):
-	if (round == 6):
-		round = 1
-		curr_deck = reset()
-	else:
-		round += 1
-	global total_rounds
-	total_rounds +=1
-
-	curr_deck = deal(curr_deck)
-	win = playTurns(curr_deck, round)
-
-	#ask to play again
-	if (playAgain(win)):
-		play(curr_deck, round)
-
-#Prompt with win percentage, then ask if want to play again
-def playAgain(win):
-	global wins
-	global total_rounds
-
-	msg = "You lost :( \n"
-	if win:		
-		wins += 1
-		msg = "You won! \n"
-
-	msg += "That makes your total win percentage: " + str(wins/total_rounds) + "%. \n"
-	again = raw_input(msg + "Would you like to play again (y or n)? \n")
-	return again == 'y'
 
 if __name__ == "__main__":
 	ready = raw_input("Welcome to Blackjack! Ready to play (y or n)? \n")
 	if ready == 'y':
-		curr_deck = reset()
-		play(curr_deck, 0)
+		curr_deck = Deck()
+		game = Game(curr_deck)
+		game.play()
 
 
 
