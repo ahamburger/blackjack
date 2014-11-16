@@ -15,8 +15,8 @@ class Game:
 
 		#player gets 2 cards (one face up, one face down)
 		self._pCards = [self._deck.pickCard(), self._deck.pickCard()]
-		print("\nThe dealer has been dealt "+ str(self._dCards) + self._deck.stringify(self._dCards))
-		print("You've been dealt " + str(self._pCards) + self._deck.stringify(self._pCards)+ "\n")
+		print("\nThe dealer has been dealt " + self._deck.stringify(self._dCards))
+		print("You've been dealt " + self._deck.stringify(self._pCards))
 
 	def dealOne(self, card_pile):
 		card = self._deck.pickCard()
@@ -33,35 +33,35 @@ class Game:
 			self.dealOne(self._pCards)
 
 			if self._deck.addCards(self._pCards) > 21:
-				print("\nNow you have "  + str(self._pCards) + self._deck.stringify(self._pCards))
+				print("\nNow you have "  + self._deck.stringify(self._pCards))
 				print ("Oops, you busted!\n")	  #TODO: bust? busted?
-				return True
+				return 1
 
-			print("\nNow you have "  + str(self._pCards) + self._deck.stringify(self._pCards)) #TODO add acutal cards string			
+			print("\nNow you have "  + self._deck.stringify(self._pCards)) #TODO add acutal cards string			
 			self.playerTurn()
 		elif move != 's':
 			print("Invalid selection. Try again. \n")
 			self.playerTurn()
 
-		return False
+		return 0
 
 	#return cards that dealer has
 	#if busted, removes those cards from deck, start new game
 	def dealerTurn(self):
 		#hit or stay or bust
-		print("The dealer has "  + str(self._dCards) + self._deck.stringify(self._dCards))
+		print("\nThe dealer has "  + self._deck.stringify(self._dCards))
 		sum = self._deck.addCards(self._dCards)
 		if sum < 17 or self._deck.isSoftSeventeen(self._dCards):
 			self.dealOne(self._dCards)
 			if self._deck.addCards(self._dCards) > 21:
-				print("Now the dealer has "  + str(self._dCards) + self._deck.stringify(self._dCards))
+				print("\nNow the dealer has " + self._deck.stringify(self._dCards))
 				print ("The dealer busted!")	  #TODO: bust? busted?
-				return True
-			print("Now the dealer has "  + str(self._dCards) + self._deck.stringify(self._dCards))	
+				return 1
+			print("\nNow the dealer has " + self._deck.stringify(self._dCards))	
 			self.dealerTurn()
 		else:
 			print("The dealer's turn is over.")
-		return False
+		return 0
 
 	def pickWinner(self):
 		d_sum = self._deck.addCards(self._dCards)
@@ -82,10 +82,10 @@ class Game:
 		pBust = self.playerTurn()
 
 		win = False
-		if not pBust:
+		if pBust == 0:
 			dBust = self.dealerTurn()
 
-			if dBust:
+			if dBust == 1:
 				win = True
 			else:
 				win = self.pickWinner() #True if player won, false if lost
@@ -113,12 +113,12 @@ class Game:
 
 	#Prompt with win percentage, then ask if want to play again
 	def playAgain(self,win):
-		msg = "You lost :( \n"
+		msg = "\nYou LOST :( \n"
 		if win:		
 			self._wins += 1
-			msg = "You won! \n"
+			msg = "\nYou WON! \n"
 
-		msg += "You've won " + str(self._wins) + " times out of " + str(self._total_rounds) + " rounds.\n" #TODO adjust plurality
+		msg += "\n You've won " + str(self._wins) + " times out of " + str(self._total_rounds) + " rounds.\n" #TODO adjust plurality
 		msg += "That makes your total win percentage: " + str(self._wins/self._total_rounds) + "%. \n"
-		again = raw_input(msg + "Would you like to play again? (y or n) \n")
+		again = raw_input(msg + "\nWould you like to play again? (y or n) \n")
 		return again == 'y'
