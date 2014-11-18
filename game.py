@@ -10,7 +10,7 @@ class Game:
 		self._total_rounds = 1
 
 	def deal(self):
-		#dealer gets 2 cards (both face up?)
+		#dealer gets 2 cards (both face up?)	TODO make one face down?
 		self._dCards = [self._deck.pickCard(), self._deck.pickCard()]
 
 		#player gets 2 cards (one face up, one face down)
@@ -28,16 +28,16 @@ class Game:
 	#if busted, removes those cards from deck, start new game
 	def playerTurn(self):
 		#hit or stay or bust
-		move = raw_input("\nWould you like to hit (h) or stay (s)? \n")
+		move = self.clean_raw_input("\nWould you like to hit (h) or stay (s)? \n")
 		if move == 'h':
 			self.dealOne(self._pCards)
 
 			if self._deck.addCards(self._pCards) > 21:
 				print("\nNow you have "  + self._deck.stringify(self._pCards))
-				print ("Oops, you busted!\n")	  #TODO: bust? busted?
+				print ("Oops, you busted!\n")
 				return 1
 
-			print("\nNow you have "  + self._deck.stringify(self._pCards)) #TODO add acutal cards string			
+			print("\nNow you have "  + self._deck.stringify(self._pCards))		
 			self.playerTurn()
 		elif move != 's':
 			print("Invalid selection. Try again. \n")
@@ -55,7 +55,7 @@ class Game:
 			self.dealOne(self._dCards)
 			if self._deck.addCards(self._dCards) > 21:
 				print("\nNow the dealer has " + self._deck.stringify(self._dCards))
-				print ("The dealer busted!")	  #TODO: bust? busted?
+				print ("The dealer busted!")
 				return 1
 			print("\nNow the dealer has " + self._deck.stringify(self._dCards))	
 			self.dealerTurn()
@@ -120,5 +120,14 @@ class Game:
 
 		msg += "\n You've won " + str(self._wins) + " times out of " + str(self._total_rounds) + " rounds.\n" #TODO adjust plurality
 		msg += "That makes your total win percentage: " + str(self._wins/self._total_rounds) + "%. \n"
-		again = raw_input(msg + "\nWould you like to play again? (y or n) \n")
+		again = self.clean_raw_input(msg + "\nWould you like to play again? (y or n) \n")
 		return again == 'y'
+
+	def clean_raw_input(self, string):
+		try:
+			return raw_input(string)
+		except EOFError:
+			return "\nQuitting"
+		except KeyboardInterrupt:
+			return "\nQuitting"
+
