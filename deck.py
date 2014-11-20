@@ -6,14 +6,24 @@ class Deck:
 	def __init__(self, cards_left=[]):
 		self.reset()
 
+	#make all cards available
 	def reset(self):
 		self._cards_left = range(0,52)		# each value 0-51 correlates with a unique card. cards are removed from this list as they 
 											# are used.
 
+	#reset all cards except those in the parameter card lists
+	#do this by restoring all cards to cards_left, then removing those in the two specified card lists
+	def shuffleMinus(self, cardList1, cardList2):
+		self.reset()
+		for c in cardList1:
+			self._cards_left.remove(c)
+		for c2 in cardList2:
+			self._cards_left.remove(c2)
+
 	# returns index (0-51) of randomly selected card from remaining deck
+	# if there are no cards left, return -1
 	def pickCard(self):
 		if len(self._cards_left)==0:
-			print "out of cards"	#TODO reshuffle? will this happen?
 			return -1
 
 		randomCard = random.randint(0,len(self._cards_left)-1) # random number between 0 and len(cards_left)

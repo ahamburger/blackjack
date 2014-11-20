@@ -25,10 +25,14 @@ class Game:
 		print("\n*******\nThe dealer has been dealt " + self._deck.stringify(self._dCards, True))
 		print("You've been dealt " + self._deck.stringify(self._pCards, False))
 
-
 	# Add one card from the deck to the parameter pile
 	def dealOne(self, card_pile):
 		card = self._deck.pickCard()
+
+		if card == -1:	#ran out of cards
+			self._deck.shuffleMinus(self._pCards, self._dCards)
+			card = self._deck.pickCard()
+
 		card_pile.append(card)
 
  
