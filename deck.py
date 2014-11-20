@@ -38,7 +38,7 @@ class Deck:
 			return "a King"
 
 	def tooFewCards(self):
-		return len(self._cards_left) < 10 #TODO this is an arbitrary number at the moment
+		return len(self._cards_left) < 5
 
 
 	#TODO explain ace logic
