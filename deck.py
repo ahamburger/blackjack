@@ -7,9 +7,6 @@ class Deck:
 		self.reset()
 
 	def reset(self):
-		#self._card_usage = [1]*52			# each index represents a unique card. 1 at that index if available, 0 otherwise
-											# a helper to assure that we aren't using cards multiple times before a shuffle
-
 		self._cards_left = range(0,52)		# each value 0-51 correlates with a unique card. cards are removed from this list as they 
 											# are used.
 
@@ -21,10 +18,6 @@ class Deck:
 
 		randomCard = random.randint(0,len(self._cards_left)-1) # random number between 0 and len(cards_left)
 		cardIndex = self._cards_left.pop(randomCard)	
-
-		#Tests to assure not re-using cards before shuffle
-		#assert self._card_usage[cardIndex] == 1, "Card already used"		
-		#self._card_usage[cardIndex] = 0
 
 		return cardIndex
 
