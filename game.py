@@ -1,4 +1,5 @@
 from deck import Deck
+import sys
 
 class Game:
 	def __init__(self):
@@ -38,6 +39,9 @@ class Game:
 
 			print("\n*******\nNow you have "  + self._deck.stringify(self._pCards, False))		
 			return self.playerTurn()
+		elif move == 'q':
+			return sys.exit("Quitting")
+
 		elif move != 's':
 			print("Invalid selection. Try again. \n")
 			return self.playerTurn()
