@@ -71,11 +71,13 @@ class Game:
 		p_sum = self._deck.addCards(self._pCards)
 		
 		if (21-p_sum < 21-d_sum):	#player is closer to 21 than dealer
-			return True
-		elif (21-p_sum == 21-d_sum): #tie--- TODO find out what todo
-			return False
+			self._wins += 1.0
+			return "WIN!"
+		elif (21-p_sum == 21-d_sum): #tie
+			self.total_rounds-=1   #don't want to affect our win percentage
+			return "and the dealer TIE."
 		else:
-			return False
+			return "LOSE :("
 
 	
 	# deal cards, then play turns
@@ -84,13 +86,13 @@ class Game:
 
 		pBust = self.playerTurn()
 
-		win = False
+		win = "LOSE :("
 		if not pBust:
 			print("\n*******\nThe dealer has "  + self._deck.stringify(self._dCards))
 			dBust = self.dealerTurn()
 
 			if dBust:
-				win = True
+				win = "WIN!"
 			else:
 				win = self.pickWinner() #True if player won, false if lost
 
@@ -117,10 +119,8 @@ class Game:
 
 	#Prompt with win percentage, then ask if want to play again
 	def playAgain(self,win):
-		msg = "*******\nYou LOST :( \n"
-		if win:		
-			self._wins += 1.0
-			msg = "\nYou WON! \n"
+		msg = "*******\nYou " + win + "\n"
+
 
 		msg += "\nYou've won " + str(int(self._wins)) + " times out of " + str(int(self._total_rounds)) + " rounds.\n" #TODO adjust plurality
 		msg += "That makes your total win percentage: " + str(int(100.0 * self._wins/self._total_rounds)) + "%. \n"
