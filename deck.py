@@ -71,11 +71,19 @@ class Deck:
 			return True
 		return False
 
-	def stringify(self, cardList):	#an 8 an ace
+	def stringify(self, cardList, faceDown):
 		cards = ""
-		for c in cardList:			
-			if c == cardList[-1]:	#last card
+		comma = ", "
+		if len(cardList) == 2:		#so will say "a 2 and a 7" instead of "a 2, and a 7" if there are only two cards
+			comma = " "
+
+		for c in cardList:
+			if c == cardList[0] and faceDown:
+				continue			
+			elif c == cardList[-1] and not faceDown:	#last card
 				cards += "and " + self.cardify(c) + "."
 			else:
-				cards += self.cardify(c)+ ", "
+				cards += self.cardify(c)+ comma
+		if faceDown:
+			cards += "and a face down card."
 		return cards
