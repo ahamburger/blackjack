@@ -3,7 +3,6 @@ import sys
 
 ### GAME class: controls game play, from dealing to picking a winner. Uses a Deck to keep track of cards
 
-
 class Game:
 	def __init__(self):
 		self._deck = Deck()
