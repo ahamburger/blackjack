@@ -1,7 +1,7 @@
 from deck import Deck
 import sys
 
-### GAME class: controls game play, from dealing to picking a winner. Uses a Deck to keep track of cards
+### GAME class: controls game play, from dealing to picking a winner. Uses a Deck to keep track of cards.
 
 class Game:
 	def __init__(self):
@@ -53,11 +53,9 @@ class Game:
 			#prompt again for hit or stay	
 			print("\n*******\nNow you have "  + self._deck.stringify(self._pCards, False))	
 			return self.playerTurn()
-		elif move == 'q':
-			#exit program
-			return sys.exit("Quitting")
 		elif move != 's':
-			print("Invalid selection. Try again. \n")
+			print("\nInvalid selection. Try again.")
+			print("You have "  + self._deck.stringify(self._pCards, False))
 			return self.playerTurn()
 
 		#STAY
@@ -174,12 +172,15 @@ class Game:
 		again = self.clean_raw_input(msg + "\nWould you like to play again? (y or n) \n")
 		return again == 'y'
 
-	# Helper function so ctrl-D and ctrl-C won't throw errors
+	# Helper function so ctrl-D, ctrl-C, or 'q' will quit
 	def clean_raw_input(self, string):
 		try:
-			return raw_input(string)
+			x = raw_input(string)
+			if x == 'q':
+				return sys.exit("Quitting")
+			return x
 		except EOFError:
-			return "\nQuitting"
+		    return sys.exit("\nQuitting")
 		except KeyboardInterrupt:
-			return "\nQuitting"
+			return sys.exit("\nQuitting")
 

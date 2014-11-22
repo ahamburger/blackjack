@@ -2,6 +2,19 @@ import random
 
 #DECK class: keeps track of cards available and picking cards to deal
 
+# Note: 
+# self._cards_left is a list of numbers 0-51
+
+# each set of 13 indices represents a different suit of cards.
+# For example-- 
+# Hearts: 1st 13 indices (0-12) -- 0: ace, 1: 2, 2: 3 ... 9: 10, 10: jack, 11: queen, 12: king
+# Diamonds: 2nd 13 indices (13-25)
+# Clubs: 3rd 13 indices (26-38)
+# Spades: 4th 13 indices (39-51)
+
+# to pick a new card, select random int between 0 and size of self._cards_left 
+# use whatever number is at that index (and remove that number) as drawn card
+
 class Deck:
 	def __init__(self, cards_left=[]):
 		self.reset()
